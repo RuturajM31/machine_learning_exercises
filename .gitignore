@@ -1,22 +1,24 @@
-# macOS system files
-.DS_Store
-
-# Jupyter checkpoints
-.ipynb_checkpoints/
+# Virtual environments
+.venv/
+venv/
+.venv_hr/
+*/.venv_hr/
 
 # Python cache
 __pycache__/
 *.pyc
 
-# Virtual environments
-.venv/
-venv/
-env/
+# Jupyter
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
 
-# Secrets
-.env
+# macOS
+.DS_Store
 
-# Large raw data files
-*.csv
-*.xlsx
-*.zip
+# Kaggle credentials / secrets
+kaggle.json
+access_token
+.kaggle/
+
+# Logs / temporary files
+*.log
