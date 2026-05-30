@@ -22,3 +22,15 @@ access_token
 
 # Logs / temporary files
 *.log
+
+# Ignore virtual environment inside day_2_ml
+day_2_ml/.venv_hr/
+day_2_ml/.venv_hr/**
+
+# Ignore any virtual environment in any project folder
+**/.venv_hr/
+**/.venv_hr/**
+**/.venv/
+**/.venv/**
+**/venv/
+**/venv/**
