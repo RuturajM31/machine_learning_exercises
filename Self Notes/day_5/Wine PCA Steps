@@ -1,0 +1,13 @@
+1. Loaded the Wine Quality dataset.
+2. Inspected rows, columns, missing values, and basic statistics.
+3. Separated input features X and target y.
+4. Used only wine chemistry features for PCA.
+5. Kept quality separately only for plot colouring.
+6. Standardised input features using StandardScaler.
+7. Applied PCA with 2 components.
+8. Created a 2D PCA scatter plot coloured by quality.
+9. Checked explained variance ratio.
+10. Applied PCA with 3 components.
+11. Created a 3D PCA scatter plot.
+12. Compared 2D vs 3D explained variance.
+13. Wrote final interpretation.

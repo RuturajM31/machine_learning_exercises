@@ -1,0 +1,18 @@
+1. Downloaded and loaded the RNA-Seq dataset.
+2. Loaded data.csv and labels.csv.
+3. Inspected dataset structure.
+4. Identified sample ID column and tumour label column.
+5. Removed sample ID from input features.
+6. Created X from gene expression features.
+7. Created y from tumour class labels.
+8. Checked missing values.
+9. Standardised gene expression features.
+10. Applied PCA with all components.
+11. Created cumulative explained variance scree plot.
+12. Found number of components needed for 95% variance.
+13. Trained Logistic Regression using all original features.
+14. Trained Logistic Regression using PCA-reduced features.
+15. Compared accuracy and training time.
+16. Analysed PCA loadings.
+17. Identified top genes contributing to PC1.
+18. Wrote final interpretation.
