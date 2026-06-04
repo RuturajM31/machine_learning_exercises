@@ -34,3 +34,36 @@ day_2_ml/.venv_hr/**
 **/.venv/**
 **/venv/
 **/venv/**
+
+# Jupyter checkpoints
+.ipynb_checkpoints/
+
+# Raw datasets
+*.csv
+*.tar.gz
+*.zip
+data/
+TCGA-PANCAN-HiSeq-801x20531/
+TCGA-PANCAN-HiSeq-801x20531/
+TCGA-PANCAN-HiSeq-801x20531.tar.gz
+
+# Python cache
+__pycache__/
+*.pyc
+
+# System files
+.DS_Store
+EOF
+
+cat >> ../.gitignore << 'EOF'
+
+# Day 5 raw dataset files
+day_5_ml/TCGA-PANCAN-HiSeq-801x20531/
+day_5_ml/TCGA-PANCAN-HiSeq-801x20531.tar.gz
+day_5_ml/*.csv
+day_5_ml/*.zip
+day_5_ml/*.tar.gz
+
+# Jupyter checkpoints
+day_5_ml/.ipynb_checkpoints/
+EOF
