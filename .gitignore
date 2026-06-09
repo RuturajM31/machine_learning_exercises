@@ -19,7 +19,10 @@ venv/
 # ============================================================
 
 __pycache__/
+**/__pycache__/
 *.pyc
+*.pyo
+*.pyd
 
 
 # ============================================================
@@ -28,6 +31,7 @@ __pycache__/
 
 .ipynb_checkpoints/
 **/.ipynb_checkpoints/
+**/.ipynb_checkpoints/**
 
 
 # ============================================================
@@ -35,6 +39,7 @@ __pycache__/
 # ============================================================
 
 .DS_Store
+**/.DS_Store
 Thumbs.db
 
 
@@ -43,9 +48,14 @@ Thumbs.db
 # ============================================================
 
 .env
+**/.env
 kaggle.json
+**/kaggle.json
 access_token
+**/access_token
 .kaggle/
+**/.kaggle/
+**/.kaggle/**
 
 
 # ============================================================
@@ -53,6 +63,8 @@ access_token
 # ============================================================
 
 *.log
+*.tmp
+*.temp
 
 
 # ============================================================
@@ -62,10 +74,35 @@ access_token
 *.csv
 *.tar.gz
 *.zip
+*.gz
 data/
+**/data/
+**/data/**
 
 TCGA-PANCAN-HiSeq-801x20531/
 TCGA-PANCAN-HiSeq-801x20531.tar.gz
+
+
+# ============================================================
+# Build / package junk
+# ============================================================
+
+build/
+dist/
+*.egg-info/
+**/build/
+**/dist/
+**/*.egg-info/
+**/*.egg-info/**
+
+
+# ============================================================
+# Failed / temporary package experiments
+# ============================================================
+
+sklearn-oblique-tree/
+**/sklearn-oblique-tree/
+**/sklearn-oblique-tree/**
 
 
 # ============================================================
@@ -86,3 +123,24 @@ day_5_ml/*.csv
 day_5_ml/*.zip
 day_5_ml/*.tar.gz
 day_5_ml/.ipynb_checkpoints/
+
+
+# ============================================================
+# Day 7 Decision Trees cleanup
+# ============================================================
+
+# Failed / temporary oblique tree package experiment
+day_7_ml/sklearn-oblique-tree/
+day_7_ml/sklearn-oblique-tree/**
+
+# Day 7 local raw data
+day_7_ml/data/
+day_7_ml/data/**
+day_7_ml/*.csv
+day_7_ml/*.zip
+day_7_ml/*.tar.gz
+day_7_ml/*.gz
+
+# Day 7 notebook junk
+day_7_ml/.ipynb_checkpoints/
+day_7_ml/.ipynb_checkpoints/**
