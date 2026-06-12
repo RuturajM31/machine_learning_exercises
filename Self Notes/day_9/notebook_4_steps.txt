@@ -1,0 +1,27 @@
+1. Loaded prepared train/test data from Notebook 2.
+2. Recreated the preprocessing pipeline for numeric and categorical features.
+3. Defined base learners:
+   Random Forest
+   Logistic Regression
+   KNN
+   Decision Tree
+5. Set up 5-fold Stratified Cross-Validation to compare models fairly.
+6. Evaluated each base learner with CV using:
+Accuracy
+F1-score
+ROC-AUC
+7. Identified Random Forest as the best individual base learner.
+8. Built StackingClassifier with Logistic Regression meta-model.
+9. Compared stacking vs all base learners using CV.
+10. Confirmed stacking slightly outperformed the base learners in CV.
+11. Built second StackingClassifier with Random Forest meta-model.
+12. Compared LR meta-model vs RF meta-model.
+13. Trained both stacking models on the full training set.
+14. Evaluated both stacking models on the held-out test set.
+15. Selected RF-meta stacking as the best held-out test model by F1-score.
+16. Saved final results, models, and reports for the next notebooks.
+
+Main takeaway:
+
+Best CV model: StackingClassifier with LR meta-model
+Best held-out test model: StackingClassifier with RF meta-model

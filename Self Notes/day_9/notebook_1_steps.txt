@@ -1,0 +1,50 @@
+## Notebook 1 — Steps Only
+
+Step 01: Started Learning Day 9 by treating uploaded course materials as the main project scope.
+
+Step 02: Listed all available Day 9 source documents, including ensemble, bagging, random forest, stacking, boosting, and cross-validation materials.
+
+Step 03: Identified which files were directly accessible and which files were not accessible, such as some Keynote files.
+
+Step 04: Reviewed the official MVD requirements for Learning Day 9: Ensemble Methods, Bagging, and Stacking.
+
+Step 05: Extracted the required MVD tasks for Beginner, Intermediate, and Expert levels.
+
+Step 06: Audited the uploaded theory sources to identify all important topics beyond the MVD.
+
+Step 07: Created the full Day 9 topic coverage list, including Bagging, Random Forest, RSM, OOB, Cross-Validation, Stacking, Blending, Manual OOF Stacking, Three-Layer Stacking, and Gradient Boosting theory.
+
+Step 08: Created a coverage matrix to map each topic to theory coverage, practical implementation, notebook location, and MVD relevance.
+
+Step 09: Confirmed that the MVD is a required checklist, but not the full project boundary.
+
+Step 10: Selected the Bank Marketing dataset because it fits a realistic customer subscription and marketing analytics use case.
+
+Step 11: Compared the dataset choice against the course requirements and confirmed that it works well for classification and ensemble learning.
+
+Step 12: Defined the business problem: predict whether a customer will subscribe to a term deposit.
+
+Step 13: Defined the target variable for the project: subscribed vs not subscribed.
+
+Step 14: Created the overall Day 9 notebook plan.
+
+Step 15: Planned Notebook 2 for data preparation and baseline models.
+
+Step 16: Planned Notebook 3 for Bagging, Random Forest, RSM, OOB, and feature importance.
+
+Step 17: Planned Notebook 4 for Cross-Validation, StackingClassifier, and Model Diversity.
+
+Step 18: Planned Notebook 5 for Manual Out-of-Fold Stacking and Blending.
+
+Step 19: Planned Notebook 6 for Three-Layer Stacking and Gradient Boosting concepts.
+
+Step 20: Planned Notebook 7 for final MVD proof, business recommendation, and project summary.
+
+Step 21: Saved the source inventory, coverage matrix, MVD checklist, dataset decision, and notebook plan as project reference files.
+
+Step 22: Established the controlling checklist for the full Day 9 project.
+
+Main takeaway:
+
+Notebook 1 created the project foundation.  
+It confirmed the source scope, MVD checklist, dataset choice, coverage matrix, and full notebook plan for Learning Day 9.

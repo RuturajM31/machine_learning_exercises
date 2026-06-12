@@ -1,0 +1,37 @@
+## Notebook 2 — Steps Only
+
+Step 01: Loaded the Bank Marketing dataset for the customer subscription prediction project.
+
+Step 02: Checked the dataset structure, including rows, columns, data types, missing values, and target variable.
+
+Step 03: Standardized the target column into binary format: 0 = Not subscribed, 1 = Subscribed.
+
+Step 04: Checked the target distribution to understand whether the classes were balanced.
+
+Step 05: Identified feature types: numeric features, categorical features, and target column.
+
+Step 06: Created the train/test split: X_train, X_test, y_train, and y_test.
+
+Step 07: Built the preprocessing pipeline for numeric and categorical features.
+
+Step 08: Trained baseline models: Dummy Classifier, Logistic Regression, KNN, and Decision Tree.
+
+Step 09: Compared baseline model performance using Accuracy, Precision, Recall, F1-score, and ROC-AUC.
+
+Step 10: Selected Logistic Regression as the strongest baseline model.
+
+Step 11: Created the confusion matrix for the best baseline model.
+
+Step 12: Interpreted false positives and false negatives for the marketing campaign use case.
+
+Step 13: Saved prepared data files for the next notebooks.
+
+Step 14: Saved baseline results and trained baseline pipelines.
+
+Step 15: Prepared the project foundation for ensemble models in Notebook 3 and Notebook 4.
+
+Main takeaway:
+
+Best baseline model: Logistic Regression  
+Best baseline F1-score: 0.8191  
+Best baseline ROC-AUC: 0.9071

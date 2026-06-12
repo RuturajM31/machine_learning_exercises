@@ -1,0 +1,262 @@
+## Reference Note: Manual OOF Stacking Code
+
+### What this code is doing
+
+This code manually creates the prediction table needed for stacking.
+
+Instead of giving the meta-model the original customer columns like `age`, `balance`, `job`, and `campaign`, we give it predictions from the base models.
+
+The final meta-model will learn from these base-model predictions.
+
+Simple idea:
+
+```text
+Original customer data
+→ base models make predictions
+→ prediction table is created
+→ meta-model learns from prediction table
+```
+
+---
+
+### Why we need OOF predictions
+
+OOF means Out-of-Fold.
+
+It means each base model predicts rows that it did not train on.
+
+This is important because the meta-model should learn from fair predictions, not from predictions where the base model already saw the answers.
+
+Bad approach:
+
+```text
+Train base model on all training data
+Predict the same training data
+Use those predictions for meta-model
+```
+
+This is unfair because the model already saw those rows.
+
+Good OOF approach:
+
+```text
+Train base model on 4 folds
+Predict the 1 fold it did not see
+Store those predictions
+Repeat until every training row has fair predictions
+```
+
+---
+
+### Main variables in this code
+
+| Variable                   | Meaning                                                                           |
+| -------------------------- | --------------------------------------------------------------------------------- |
+| `cv_strategy`              | Creates the 5-fold split plan                                                     |
+| `oof_train_predictions`    | Empty table that will store fair base-model predictions for training rows         |
+| `test_predictions_by_fold` | Empty table that stores test-set predictions from each fold-trained model         |
+| `fold_score_rows`          | List that stores fold-level F1 and ROC-AUC scores                                 |
+| `fold_train_index`         | Row positions used to train the base model in the current fold                    |
+| `fold_valid_index`         | Row positions hidden from the base model in the current fold                      |
+| `X_fold_train`             | Training features for the current fold                                            |
+| `y_fold_train`             | Training target for the current fold                                              |
+| `X_fold_valid`             | Hidden validation features for the current fold                                   |
+| `y_fold_valid`             | Real answers for the hidden validation fold                                       |
+| `fold_pipeline`            | Fresh preprocessing + model pipeline for the current fold                         |
+| `valid_probability`        | Predicted subscription probabilities for the hidden validation fold               |
+| `valid_prediction`         | 0/1 predictions created from `valid_probability` using the 0.5 cutoff             |
+| `test_probability`         | Predicted subscription probabilities for the test set from one fold-trained model |
+
+---
+
+### Important output 1: `oof_train_predictions`
+
+This is the most important output of the cell.
+
+It starts as an empty table:
+
+```text
+Customer | Random Forest | Logistic Regression | KNN | Decision Tree
+1        | empty         | empty               | empty | empty
+2        | empty         | empty               | empty | empty
+3        | empty         | empty               | empty | empty
+```
+
+During the loop, the table is filled with fair OOF predictions.
+
+At the end, it looks like this:
+
+```text
+Customer | Random Forest | Logistic Regression | KNN | Decision Tree
+1        | 0.82          | 0.76                | 0.60 | 1.00
+2        | 0.14          | 0.25                | 0.30 | 0.00
+3        | 0.67          | 0.70                | 0.55 | 1.00
+```
+
+This table becomes the new training data for the meta-model.
+
+Later we use it like this:
+
+```python
+meta_model.fit(oof_train_predictions, y_train)
+```
+
+Meaning:
+
+```text
+Meta-model learns from base-model predictions.
+```
+
+---
+
+### Important output 2: `test_predictions_by_fold`
+
+This table stores predictions for the test set.
+
+Each fold trains a slightly different version of every base model.
+
+So each base model predicts the test set five times, once per fold.
+
+Example:
+
+```text
+Random Forest fold 1 predicts X_test
+Random Forest fold 2 predicts X_test
+Random Forest fold 3 predicts X_test
+Random Forest fold 4 predicts X_test
+Random Forest fold 5 predicts X_test
+```
+
+Later, these five predictions are averaged.
+
+This gives more stable test meta-features for the meta-model.
+
+---
+
+### What happens inside the loop
+
+Step 01: The code creates a 5-fold split using `StratifiedKFold`.
+
+Step 02: For each fold, one part of the training data is hidden as validation data.
+
+Step 03: The remaining four parts are used to train the base model.
+
+Step 04: Each base model predicts the hidden validation part.
+
+Step 05: These validation predictions are stored in `oof_train_predictions`.
+
+Step 06: The same fold-trained model also predicts the test set.
+
+Step 07: These test predictions are stored in `test_predictions_by_fold`.
+
+Step 08: F1-score and ROC-AUC are calculated for the validation fold.
+
+Step 09: The fitted fold model is deleted from memory to avoid kernel crashes.
+
+Step 10: The process repeats until all 5 folds and all base models are completed.
+
+---
+
+### The most important line
+
+```python
+oof_train_predictions[fold_valid_index, model_position] = valid_probability
+```
+
+This line means:
+
+```text
+Put this model's predictions for the hidden validation rows
+into the correct rows and correct model column of the OOF table.
+```
+
+Example:
+
+If the current model is Random Forest, and the current fold is Fold 1, this line stores Random Forest predictions for Fold 1 validation customers.
+
+After all folds finish, every training row has one fair prediction from each base model.
+
+---
+
+### Where the evaluation metrics come from
+
+The evaluation metrics are calculated here:
+
+```python
+f1_score(y_fold_valid, valid_prediction, zero_division=0)
+roc_auc_score(y_fold_valid, valid_probability)
+```
+
+They compare:
+
+```text
+Real answers from the hidden validation fold
+vs.
+Model predictions for the hidden validation fold
+```
+
+`y_fold_valid` contains the real answers.
+
+`valid_prediction` contains the predicted 0/1 labels.
+
+`valid_probability` contains the predicted subscription probabilities.
+
+So the metric flow is:
+
+```text
+Real validation answers + model validation predictions
+→ calculate F1 and ROC-AUC
+→ store result in fold_score_rows
+```
+
+---
+
+### Why `clone(model)` is used
+
+```python
+fold_pipeline = make_pipeline_for_model(clone(model))
+```
+
+`clone(model)` creates a fresh copy of the model for the current fold.
+
+This is important because every fold must start with a clean model.
+
+Without cloning, one fold could accidentally reuse learning from another fold.
+
+---
+
+### Why `gc.collect()` and `del` are used
+
+The loop trains many models.
+
+Total training count:
+
+```text
+5 folds × 4 base models = 20 fitted pipelines
+```
+
+This can use a lot of memory.
+
+So the code deletes temporary fitted models and temporary fold data after each fold.
+
+This helps avoid kernel crashes.
+
+---
+
+### One-line summary
+
+This cell creates fair base-model prediction columns for manual stacking.
+
+The final result is:
+
+```text
+oof_train_predictions = training data for the meta-model
+test_predictions_by_fold = test prediction data for later meta-model evaluation
+```
+
+In simple words:
+
+```text
+Base models first make fair predictions.
+Then the meta-model learns from those predictions.
+```

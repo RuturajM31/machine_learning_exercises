@@ -1,0 +1,48 @@
+## Notebook 3 — Simple Steps
+
+Step 01: Loaded the prepared train/test data from Notebook 2.
+
+Step 02: Recreated the same preprocessing pipeline for numeric and categorical features.
+
+Step 03: Trained one single Decision Tree model.
+
+Step 04: Trained a Random Forest model with 100 trees.
+
+Step 05: Compared the single Decision Tree with the Random Forest.
+
+Step 06: Checked that the single Decision Tree overfitted, because it performed perfectly on training data but weaker on test data.
+
+Step 07: Confirmed that Random Forest performed better and was more stable than one Decision Tree.
+
+Step 08: Checked feature importance for both models.
+
+Step 09: Identified important features such as duration, balance, age, day, campaign, and poutcome_success.
+
+Step 10: Tested Random Forest with different numbers of trees from 10 to 500.
+
+Step 11: Found that performance became stable around 100 trees.
+
+Step 12: Trained Random Forest with OOB score to get internal validation.
+
+Step 13: Tested Random Subspace Method using different max_features values.
+
+Step 14: Selected max_features = 0.5 as the best tested Random Forest setting.
+
+Step 15: Saved the Random Forest results, feature importance, OOB results, and max_features comparison.
+
+## Important Notes
+
+Random Forest is stronger than one Decision Tree because it combines many trees.
+
+Bagging means each tree trains on a different random sample of rows.
+
+OOB score is not bagging. OOB score is a validation method made possible by bagging.
+
+Random Subspace Method means each tree/split uses only part of the features.
+
+In this notebook, Random Forest worked best with 100 trees and max_features = 0.5.
+
+Main result:
+
+Random Forest Test F1-score: 0.8596  
+Random Forest Test ROC-AUC: 0.9193
