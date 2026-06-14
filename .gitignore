@@ -70,7 +70,7 @@ access_token
 # ============================================================
 # Raw datasets / large data files
 # ============================================================
-
+day_11_ml/outputs
 *.csv
 *.tar.gz
 *.zip
@@ -78,9 +78,17 @@ access_token
 data/
 **/data/
 **/data/**
+day_10_ml/catboost_info
+day_7_ml/outputs
+day_2_ml/data
+
 
 TCGA-PANCAN-HiSeq-801x20531/
 TCGA-PANCAN-HiSeq-801x20531.tar.gz
+
+day_8_ml/figures
+day_8_ml/outputs
+day_8_ml/reports
 
 
 # ============================================================
