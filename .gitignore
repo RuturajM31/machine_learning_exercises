@@ -81,6 +81,8 @@ data/
 day_10_ml/catboost_info
 day_7_ml/outputs
 day_2_ml/data
+day_15_ml/catboost_info
+
 
 
 TCGA-PANCAN-HiSeq-801x20531/
@@ -131,6 +133,7 @@ day_5_ml/*.csv
 day_5_ml/*.zip
 day_5_ml/*.tar.gz
 day_5_ml/.ipynb_checkpoints/
+day_15_ml/outputs/tables
 
 
 # ============================================================
@@ -152,3 +155,9 @@ day_7_ml/*.gz
 # Day 7 notebook junk
 day_7_ml/.ipynb_checkpoints/
 day_7_ml/.ipynb_checkpoints/**
+
+# ============================================================
+# Models
+# ============================================================
+
+day_15_ml/outputs/models
